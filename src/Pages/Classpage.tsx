@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import Layout from '../Layout';
 import Swal from 'sweetalert2';
+import Layout from '../Layout';
 
 const Table = () => {
   const [data, setData] = useState([
-    { id: 1, fullName: 'John Doe', email: 'johndoe@example.com', team: 'Tim A', role: 'Pegawai', status: 'Aktif' },
-    { id: 2, fullName: 'Jane Smith', email: 'janesmith@example.com', team: 'Tim B', role: 'Manajer', status: 'Tidak Aktif' },
+    { id: 1, className: 'Class A', startDate: '2023-01-01', graduate: 'Yes', mentor: 'John Doe' },
+    { id: 2, className: 'Class B', startDate: '2023-02-01', graduate: 'No', mentor: 'Jane Smith' },
   ]);
 
   const handleDelete = (itemId:any) => {
@@ -22,7 +22,7 @@ const Table = () => {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Ya',
       cancelButtonText: 'Tidak',
-    }).then((result:any) => {
+    }).then((result) => {
       if (result.isConfirmed) {
         // Jika pengguna mengonfirmasi penghapusan, lakukan penghapusan di sini
         const updatedData = data.filter((item) => item.id !== itemId);
@@ -33,7 +33,7 @@ const Table = () => {
   };
 
   return (
-    <Layout> {/* Gunakan komponen Layout di sini */}
+    <Layout>
       <div className="flex justify-between items-center mb-4">
         <Link to="/newuser" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Tambah
@@ -48,11 +48,10 @@ const Table = () => {
         <thead>
           <tr>
             <th className="border px-4 py-2">No</th>
-            <th className="border px-4 py-2">Full Name</th>
-            <th className="border px-4 py-2">Email</th>
-            <th className="border px-4 py-2">Team</th>
-            <th className="border px-4 py-2">Role</th>
-            <th className="border px-4 py-2">Status</th>
+            <th className="border px-4 py-2">Nama Class</th>
+            <th className="border px-4 py-2">Start Date</th>
+            <th className="border px-4 py-2">Graduate</th>
+            <th className="border px-4 py-2">Mentor</th>
             <th className="border px-4 py-2">Aksi</th>
           </tr>
         </thead>
@@ -60,11 +59,10 @@ const Table = () => {
           {data.map((item) => (
             <tr key={item.id}>
               <td className="border px-4 py-2">{item.id}</td>
-              <td className="border px-4 py-2">{item.fullName}</td>
-              <td className="border px-4 py-2">{item.email}</td>
-              <td className="border px-4 py-2">{item.team}</td>
-              <td className="border px-4 py-2">{item.role}</td>
-              <td className="border px-4 py-2">{item.status}</td>
+              <td className="border px-4 py-2">{item.className}</td>
+              <td className="border px-4 py-2">{item.startDate}</td>
+              <td className="border px-4 py-2">{item.graduate}</td>
+              <td className="border px-4 py-2">{item.mentor}</td>
               <td className="flex border px-4 py-2 justify-center items-center h-20">
                 <Link to={`/updateuser/`} className="text-blue-500 hover:text-blue-700 cursor-pointer">
                   <FontAwesomeIcon icon={faEdit} />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Navbar from '../component/Navbar';
-import Header from '../component/Header';
+import Navbar from '../components/Sidebar';
+import Header from '../components/Header';
 
 const YourFormComponent = () => {
   const [formData, setFormData] = useState({

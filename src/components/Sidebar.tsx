@@ -70,17 +70,7 @@ const Sidebar: React.FC = () => {
           <li
             className={`menu-item ${pathname === '/user' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
           >
-            <Link to="/user" className="menu-link">
-              <span className="flex items-center mb-3 mt-3">
-                <FontAwesomeIcon icon={faUser} className="mr-2" />
-                <div data-i18n="Analytics">User</div>
-              </span>
-            </Link>
-          </li>
-          <li
-            className={`menu-item ${pathname === '/mentee' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
-          >
-            <Link to="/page" className="menu-link">
+            <Link to="/Mentee" className="menu-link">
               <span className="flex items-center mb-3 mt-3">
                 <FontAwesomeIcon icon={faUser} className="mr-2" />
                 <div data-i18n="Analytics">Mentee</div>
@@ -88,9 +78,19 @@ const Sidebar: React.FC = () => {
             </Link>
           </li>
           <li
+            className={`menu-item ${pathname === '/mentee' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
+          >
+            <Link to="/page" className="flex">
+              <span className="flex items-center mb-3 mt-3">
+                <FontAwesomeIcon icon={faUser} className="mr-2" />
+                <div data-i18n="Analytics">User</div>
+              </span>
+            </Link>
+          </li>
+          <li
             className={`menu-item ${pathname === '/class' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
           >
-            <Link to="/class" className="menu-link">
+            <Link to="/classpage" className="flex">
               <span className="flex items-center mb-3 mt-3">
                 <FontAwesomeIcon icon={faSchool} className="mr-2" />
                 <div data-i18n="Analytics">Class</div>
