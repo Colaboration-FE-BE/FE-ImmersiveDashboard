@@ -1,11 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 
+import Dashboard from "./Pages/Dashboard";
+import Login from "./Pages/Login";
+import Mente from "./Pages/Mente";
+import MenteLog from "./Pages/MenteLog";
+
 import Header from "./components/Header";
-import UserPage from './Pages/UserPage';
-import Newuser from './Pages/NewUser';
-import Update from './Pages/Updateuser';
-import Classpage from './Pages/Classpage';
+import UserPage from "./Pages/UserPage";
+import Newuser from "./Pages/NewUser";
+import Update from "./Pages/Updateuser";
+import Classpage from "./Pages/Classpage";
 import Layout from "./Layout";
 
 const App = () => {
@@ -14,7 +19,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />} path="/" />
+        <Route element={<Login />} path="/" />
+        <Route element={<Dashboard />} path="/Dashboard" />
+        <Route element={<Mente />} path="/Mente" />
+        <Route element={<MenteLog />} path="/MenteLog" />
+        <Route element={<Layout />} path="/Layout" />
         <Route element={<Header />} path="/header" />
         <Route element={<UserPage />} path="/page" />
         <Route element={<Newuser />} path="/Newuser" />
