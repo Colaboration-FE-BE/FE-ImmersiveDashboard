@@ -2,22 +2,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 
 import Navbar from "./component/Navbar";
+import Header from "./component/Header";
+import UserPage from './Pages/UserPage';
+import Newuser from './Pages/NewUser';
+import Update from './Pages/Updateuser';
 
 const App = () => {
-  axios.defaults.baseURL = "https://fakestoreapi.com/";
+  axios.defaults.baseURL = "";
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Navbar greeting={""} onClick={function (): void {
-          throw new Error("Function not implemented.");
-        } } toggleSettingsDropdown={function (): void {
-          throw new Error("Function not implemented.");
-        } } showSettingsDropdown={false} navigate={function (path: string): void {
-          throw new Error("Function not implemented.");
-        } } handleLogout={function (): void {
-          throw new Error("Function not implemented.");
-        } } />} path="/" />
+        <Route element={<Navbar />} path="/" />
+        <Route element={<Header />} path="/header" />
+        <Route element={<UserPage />} path="/page" />
+        <Route element={<Newuser />} path="/Newuser" />
+        <Route element={<Update />} path="/updateuser" />
 
       </Routes>
     </BrowserRouter>

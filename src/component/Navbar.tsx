@@ -1,34 +1,109 @@
-import React from 'react';
-import logo from '../Image/logo.png'; 
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../Image/logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDashboard, faUser, faSchool } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = () => {
+const Sidebar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [pathname, setPathname] = useState<string>(window.location.pathname);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setPathname(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleRouteChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
+
   return (
-    <nav className="bg-gray-100 h-screen w-48 py-4 px-2 fixed top-0 left-0 shadow-md">
-      <div className="flex flex-col items-left ">
-        <div className="mb-4">
-          <img src={logo} alt="Logo" className="h-30 w-30" /> 
+    <nav
+      id="layout-menu"
+      className={`layout-menu h-screen w-full pl-10 pr-10  menu-vertical menu bg-menu-theme ${
+        isOpen ? 'layout-menu-expanded' : ''
+      }`}
+      data-bg-class="bg-menu-theme"
+    >
+      <div style={{ backgroundColor: 'white', borderRightWidth: 20, height: '100vh'}}>
+        <div className="app-brand demo" style={{ minHeight: 150 }}>
+          <Link to="/dashboard" className="app-brand-link">
+            <span className="mx-5 mr-5  bg-red-500">
+              <img style={{ width: '150px' }} src={logo} alt="Logo" />
+            </span>
+            <span className="app-brand-text demo menu-text fw-bolder ms-2">
+              {/* Altera Academy */}
+            </span>
+          </Link>
+          <a
+            onClick={() => setIsOpen(!isOpen)}
+            className="layout-menu-toggle menu-link text-large ms-auto d-xl-none"
+            style={{ color: 'red' }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={24}
+              height={24}
+              viewBox="0 0 24 24"
+              className="fill-current"
+            >
+              <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm2.707 14.293-1.414 1.414L7.586 12l5.707-5.707 1.414 1.414L10.414 12l4.293 4.293z" />
+            </svg>
+          </a>
         </div>
-        <div className="flex flex-col">
-          <a href="#" className="text-black relative mb-2 hover:text-gray-300">
-            Dashboard
-            <span className="absolute w-full h-1 bg-gray-500 bottom-0 left-0 transform scale-x-0 transition-transform origin-left"></span>
-          </a>
-          <a href="#" className="text-black relative mb-2 hover:text-gray-300">
-            Mentee
-            <span className="absolute w-full h-1 bg-gray-500 bottom-0 left-0 transform scale-x-0 transition-transform origin-left"></span>
-          </a>
-          <a href="#" className="text-black relative mb-2 hover:text-gray-300">
-            User
-            <span className="absolute w-full h-1 bg-gray-500 bottom-0 left-0 transform scale-x-0 transition-transform origin-left"></span>
-          </a>
-          <a href="#" className="text-black relative mb-2 hover:text-gray-300">
-            Class
-            <span className="absolute w-full h-1 bg-gray-500 bottom-0 left-0 transform scale-x-0 transition-transform origin-left"></span>
-          </a>
-        </div>
+
+        <div className="menu-inner-shadow" />
+        <ul className="menu-inner py-1 ps ps--active-y">
+          <li
+            className={`menu-item ${pathname === '/dashboard' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
+          >
+            <Link to="/dashboard" className="menu-link">
+              <span className="flex items-center mb-3 mt-3">
+                <FontAwesomeIcon icon={faDashboard} className="mr-2" />
+                <div data-i18n="Analytics">Dashboard</div>
+              </span>
+            </Link>
+          </li>
+          <li
+            className={`menu-item ${pathname === '/user' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
+          >
+            <Link to="/user" className="menu-link">
+              <span className="flex items-center mb-3 mt-3">
+                <FontAwesomeIcon icon={faUser} className="mr-2" />
+                <div data-i18n="Analytics">User</div>
+              </span>
+            </Link>
+          </li>
+          <li
+            className={`menu-item ${pathname === '/mentee' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
+          >
+            <Link to="/page" className="menu-link">
+              <span className="flex items-center mb-3 mt-3">
+                <FontAwesomeIcon icon={faUser} className="mr-2" />
+                <div data-i18n="Analytics">Mentee</div>
+              </span>
+            </Link>
+          </li>
+          <li
+            className={`menu-item ${pathname === '/class' ? 'active' : ''} hover:bg-gray-300 hover:rounded`}
+          >
+            <Link to="/class" className="menu-link">
+              <span className="flex items-center mb-3 mt-3">
+                <FontAwesomeIcon icon={faSchool} className="mr-2" />
+                <div data-i18n="Analytics">Class</div>
+              </span>
+            </Link>
+          </li>
+        </ul>
       </div>
     </nav>
+
+
+      
   );
 };
 
-export default Navbar;
+export default Sidebar;
