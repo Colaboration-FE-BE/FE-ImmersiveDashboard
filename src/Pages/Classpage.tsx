@@ -172,7 +172,7 @@ const Table = () => {
 
   return (
     <Layout>
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-4 w-5/6">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={handleTambahClick}
@@ -185,24 +185,24 @@ const Table = () => {
           placeholder="Cari..."
         />
       </div>
-      <table className="min-w-full table-auto">
+      <table className="table-auto border-separate border-spacing-2 border w-full">
         <thead>
           <tr>
-            <th className="border px-4 py-2">No</th>
-            <th className="border px-4 py-2">Nama Class</th>
-            <th className="border px-4 py-2">PIC</th>
-            <th className="border px-4 py-2">Start Date</th>
-            <th className="border px-4 py-2">Graduate Date</th>
-            <th className="border px-4 py-2">Aksi</th>
+            <th className="border border-slate-300 p-2">No</th>
+            <th className="border border-slate-300 p-2">Nama Class</th>
+            <th className="border border-slate-300 p-2">PIC</th>
+            <th className="border border-slate-300 p-2">Start Date</th>
+            <th className="border border-slate-300 p-2">Graduate Date</th>
+            <th className="border border-slate-300 p-2">Aksi</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="hover:bg-slate-200">
           {data.map((item) => (
             <tr key={item.id}>
-              <td className="border px-4 py-2">{item.id}</td>
-              <td className="border px-4 py-2">{item.name}</td>
-              <td className="border px-4 py-2">{item.pic}</td>
-              <td className="border px-4 py-2">
+              <td className="p-2">{item.id}</td>
+              <td className="p-2">{item.name}</td>
+              <td className="p-2">{item.pic}</td>
+              <td className="p-2">
                 {new Date(item.start_date).toLocaleDateString()}
               </td>
               <td className="border px-4 py-2">

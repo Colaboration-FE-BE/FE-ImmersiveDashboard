@@ -1,9 +1,11 @@
 import React from "react";
 
 import CardDashboard from "../components/sandy/CardDashboard";
+import Layout from "../Layout";
 
 const Dashboard = () => {
   return (
+    <Layout>
     <div className=" container w-full">
       <div className=" flex justify-center">
         <div className=" grid grid-cols-1 gap-5">
@@ -33,6 +35,7 @@ const Dashboard = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
+import Layout from "../Layout";
 import PopupNewLog from "../components/sandy/PopupNewLog";
 import CardMente from "../components/sandy/CardMente";
 import CardLog from "../components/sandy/CardLog";
@@ -28,6 +28,7 @@ const MenteLog = () => {
   };
 
   return (
+    <Layout>
     <div className=" container justify-center m-5">
       <div className=" flex gap-3">
         <img src="src\assets\Back.svg" onClick={handleClick} />
@@ -70,6 +71,7 @@ const MenteLog = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 

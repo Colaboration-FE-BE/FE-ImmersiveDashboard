@@ -43,7 +43,7 @@ const Sidebar: React.FC = () => {
               <img style={{ width: "150px" }} src={logo} alt="Logo" />
             </span>
             <span className="app-brand-text demo menu-text fw-bolder ms-2">
-              {/* Altera Academy */}
+
             </span>
           </Link>
           <a
@@ -78,7 +78,7 @@ const Sidebar: React.FC = () => {
             className={`menu-item ${
               pathname === "/user" ? "active" : ""
             } hover:bg-gray-300 hover:rounded`}>
-            <Link to="/Mentee" className="menu-link">
+            <Link to="/Mente" className="menu-link">
               <span className="flex items-center mb-3 mt-3">
                 <FontAwesomeIcon icon={faUser} className="mr-2" />
                 <div data-i18n="Analytics">Mentee</div>
