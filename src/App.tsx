@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Login";
 import Mente from "./Pages/Mente";
 import MenteLog from "./Pages/MenteLog";
+import FormAdd from "./Pages/FormAdd";
 
 import Header from "./components/Header";
 import UserPage from "./Pages/UserPage";
@@ -21,6 +22,7 @@ const App = () => {
       <Routes>
         <Route element={<Login />} path="/" />
         <Route element={<Dashboard />} path="/Dashboard" />
+        <Route element={<FormAdd />} path="/FormAdd" />
         <Route element={<Mente />} path="/Mente" />
         <Route element={<MenteLog />} path="/MenteLog" />
         <Route element={<Layout />} path="/Layout" />

@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
+
 const Tables = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/MenteLog");
+  };
+
   return (
-    <table className=" table-auto border-separate border-spacing-2 border">
+    <table className="  bg-white  table-auto border-separate border-spacing-2 border">
       <thead>
-        <tr className="">
+        <tr className="text-slate-500">
           <th className="border border-slate-300 p-2 ">No</th>
           <th className="border border-slate-300 p-2">Full Name</th>
           <th className="border border-slate-300 p-2">Class</th>
@@ -13,7 +21,7 @@ const Tables = () => {
         </tr>
       </thead>
       <tbody className=" hover:bg-slate-200">
-        <tr>
+        <tr className="text-slate-500">
           <td className=" p-2">1</td>
           <td className=" p-2 text-slate-500 font-semibold">Mahmud Karima</td>
           <td className=" p-2">FE</td>
@@ -21,7 +29,9 @@ const Tables = () => {
           <td className=" p-2">User</td>
           <td className=" p-2">Pria</td>
           <td className=" flex gap-1 hover:bg-white">
-            <button className=" bg-sky-100 hover:bg-sky-200">
+            <button
+              onClick={handleClick}
+              className=" bg-sky-100 hover:bg-sky-200">
               <img src="src\assets\Detail.svg" alt="" />
             </button>
             <button className=" bg-indigo-500 hover:bg-indigo-600 ">

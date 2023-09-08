@@ -1,7 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
+import PopupNewLog from "../components/sandy/PopupNewLog";
 import CardMente from "../components/sandy/CardMente";
 import CardLog from "../components/sandy/CardLog";
+
+const showNewLog = () => {
+  Swal.fire({
+    title: "New Log",
+    html: content,
+    confirmButtonText: "OK",
+  });
+};
 
 const MenteLog = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -10,10 +21,16 @@ const MenteLog = () => {
     setShowPopup(!showPopup);
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/Mente");
+  };
+
   return (
     <div className=" container justify-center m-5">
       <div className=" flex gap-3">
-        <img src="src\assets\Back.svg" />
+        <img src="src\assets\Back.svg" onClick={handleClick} />
         <div>
           <p className="self-stretch text-blue-950 text-xl font-bold leading-snug">
             Mente Log
@@ -43,6 +60,7 @@ const MenteLog = () => {
             </p>
           </div>
           <img
+            onClick={showNewLog}
             src="src\assets\add doc.svg"
             className="p-1 bg-gradient-to-tr from-violet-900 to-violet-700 rounded justify-center items-center  inline-flex"
           />

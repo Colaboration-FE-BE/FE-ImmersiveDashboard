@@ -1,5 +1,3 @@
-import React from "react";
-
 const PopupNewLog = () => {
   return (
     <div className="bg-white dark:bg-slate-900 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl relative">

@@ -1,6 +1,14 @@
+import { useNavigate } from "react-router-dom";
+
 import InputForm from "../components/sandy/InputForm";
 
 const FormAdd = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/Mente");
+  };
+
   return (
     <div className="container mx-auto mt-4">
       <div className=" bg-white shadow-md p-4 rounded-md">
@@ -13,7 +21,7 @@ const FormAdd = () => {
               </div>
               <div>
                 <label>Gender</label>
-                <select className="border border-gray-300 rounded-lg p-2 w-full">
+                <select className="border border-gray-300 rounded-lg p-2 w-full  bg-slate-200 text text-blue-950">
                   <option value="Male ">Male</option>
                   <option value="Female">Female</option>
                 </select>
@@ -33,7 +41,7 @@ const FormAdd = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label htmlFor="dropdown">Status</label>
-                <select className="border border-gray-300 rounded-lg p-2 w-full">
+                <select className="border border-gray-300 rounded-lg p-2 w-full  bg-slate-200 text-blue-950">
                   <option value="Active ">Active</option>
                   <option value="Placement">Placement</option>
                   <option value="Greduates">Greduates</option>
@@ -41,7 +49,7 @@ const FormAdd = () => {
               </div>
               <div>
                 <label htmlFor="dropdown">Class</label>
-                <select className="border border-gray-300 rounded-lg p-2 w-full">
+                <select className="border border-gray-300 rounded-lg p-2 w-full  bg-slate-200 text-blue-950">
                   <option value="FE">FE</option>
                   <option value="BE">BE</option>
                   <option value="QE">QE</option>
@@ -70,7 +78,7 @@ const FormAdd = () => {
             </div>
             <div>
               <label>Status</label>
-              <select className="border border-gray-300 rounded-lg p-2 w-full">
+              <select className="border border-gray-300 rounded-lg p-2 w-full  bg-slate-200 text-blue-950">
                 <option value="Active ">Orang Tua</option>
                 <option value="Placement">Kakek Nenek</option>
                 <option value="Graduates">Saudara Orang Tua</option>
@@ -78,7 +86,9 @@ const FormAdd = () => {
             </div>
           </div>
         </div>
-        <button className="mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
+        <button
+          onClick={handleClick}
+          className="mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
           Submit
         </button>
       </div>
