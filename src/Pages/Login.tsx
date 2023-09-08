@@ -35,7 +35,7 @@ const Login = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 h-screen w-full m-5">
       <section className="hidden sm:flex p-4 w-full ">
-        <img className=" w-full object-cover" src="public\bgLanding.svg" />
+        <img src="public\bgLanding.svg" />
       </section>
       <section className="flex-col justify-center mt-1 p-3 flex">
         <div className=" flex-col max-w-[300px] w-full mx-auto gap-10 ">
