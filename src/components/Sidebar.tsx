@@ -27,7 +27,7 @@ const Sidebar: React.FC = () => {
   return (
     <nav
       id="layout-menu"
-      className={`layout-menu h-screen w-full   menu-vertical menu bg-menu-theme ${
+      className={`layout-menu h-screen w-full pl-10 pr-10  menu-vertical menu bg-menu-theme ${
         isOpen ? "layout-menu-expanded" : ""
       }`}
       data-bg-class="bg-menu-theme">
