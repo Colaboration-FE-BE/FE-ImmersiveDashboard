@@ -23,12 +23,12 @@ const Table: React.FC = () => {
     fetch(apiUrl, {
       headers: {
         Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNjUyNTksInVzZXJJZCI6IjYzNzAxOWJiLWRkNmItNGIzYy1hYjk5LWUzYzhhOTU0OWYwNiJ9.AJadbg1QHHy9Dv528X65XUrem_KC-3F7ea6COXzFkEc',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNzg4ODYsInVzZXJJZCI6IjY5ZTY1MmRlLTZjZTMtNDU5OS05MDgwLWY4OTFlNTNjZmIzNyJ9.Ktj9Zo7wrcF5Gs85vUg15V9mUo_jeqWSuragCsmOwhc',
       },
     })
       .then((response) => response.json())
       .then((result) => {
-        // Mengonversi ID ke nomor terurut
+
         const formattedData = result.data.map((item: any, index: number) => ({
           ...item,
           id: index + 1,
@@ -39,6 +39,7 @@ const Table: React.FC = () => {
         console.error('Error fetching data: ', error);
       });
   }, []);
+
 
   const handleDelete = (itemId: number) => {
     Swal.fire({
@@ -52,20 +53,20 @@ const Table: React.FC = () => {
       cancelButtonText: 'Tidak',
     }).then((result) => {
       if (result.isConfirmed) {
-        // Mengirim permintaan DELETE ke API
+
         fetch(
           `https://immersive-dash-4-32uzyeupwa-as.a.run.app/users/${itemId}`,
           {
             method: 'DELETE',
             headers: {
               Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNjUyNTksInVzZXJJZCI6IjYzNzAxOWJiLWRkNmItNGIzYy1hYjk5LWUzYzhhOTU0OWYwNiJ9.AJadbg1QHHy9Dv528X65XUrem_KC-3F7ea6COXzFkEc',
+                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNzg4ODYsInVzZXJJZCI6IjY5ZTY1MmRlLTZjZTMtNDU5OS05MDgwLWY4OTFlNTNjZmIzNyJ9.Ktj9Zo7wrcF5Gs85vUg15V9mUo_jeqWSuragCsmOwhc',
             },
           }
         )
           .then((response) => {
             if (response.ok) {
-              // Jika penghapusan berhasil, perbarui tampilan
+ 
               const updatedData = data.filter((item) => item.id !== itemId);
               setData(updatedData);
               Swal.fire('Terhapus!', 'Data telah dihapus.', 'success');
@@ -125,12 +126,13 @@ const Table: React.FC = () => {
                 >
                   <FontAwesomeIcon icon={faEdit} />
                 </Link>
-                <span
-                  className="ml-2 text-red-500 hover:text-red-700 cursor-pointer"
-                  onClick={() => handleDelete(item.id)}
-                >
-                  Delete
+                <span className='ml-2 text-red-500 hover:text-red-700 cursor-pointer'>
+                <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => handleDelete(item.id)}
+                  />
                 </span>
+
               </td>
             </tr>
           ))}

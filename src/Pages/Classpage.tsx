@@ -29,7 +29,7 @@ const Table = () => {
         const response = await axios.get(apiUrl, {
           headers: {
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNjgxOTEsInVzZXJJZCI6IjYzNzAxOWJiLWRkNmItNGIzYy1hYjk5LWUzYzhhOTU0OWYwNiJ9.1j41vt9t1iYTLQJ2tl0WA8qLjfj8I42oO5Lr8lTEwdE',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNzg4ODYsInVzZXJJZCI6IjY5ZTY1MmRlLTZjZTMtNDU5OS05MDgwLWY4OTFlNTNjZmIzNyJ9.Ktj9Zo7wrcF5Gs85vUg15V9mUo_jeqWSuragCsmOwhc',
           },
         });
 
@@ -106,14 +106,13 @@ const Table = () => {
 
   const handleSaveEdit = async (editedItem: ItemType) => {
     try {
-      // Kirim permintaan PUT atau PATCH ke API untuk menyimpan perubahan
-      const response = await axios.put(
-        `${apiUrl}/${editedItem.id}`,
+      await axios.put(
+        `https://immersive-dash-4-32uzyeupwa-as.a.run.app/class/${editedItem.id}`,
         editedItem,
         {
           headers: {
             Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNjgxOTEsInVzZXJJZCI6IjYzNzAxOWJiLWRkNmItNGIzYy1hYjk5LWUzYc29e74dca85be',
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNzg4ODYsInVzZXJJZCI6IjY5ZTY1MmRlLTZjZTMtNDU5OS05MDgwLWY4OTFlNTNjZmIzNyJ9.Ktj9Zo7wrcF5Gs85vUg15V9mUo_jeqWSuragCsmOwhc',
           },
         }
       );
@@ -154,7 +153,7 @@ const Table = () => {
           await axios.delete(`https://immersive-dash-4-32uzyeupwa-as.a.run.app/class/${itemId}`, {
             headers: {
               Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNzIxNzksInVzZXJJZCI6IjY1ZjRjY2FlLWNhMTgtNDU2Yy05YTBmLTAyYTQwYzJiNjMzZCJ9.CIeNI6DTK7u5hWjpclQ1_G2ToMpiyfMk_6Lc7mkhOB0',
+                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNzg4ODYsInVzZXJJZCI6IjY5ZTY1MmRlLTZjZTMtNDU5OS05MDgwLWY4OTFlNTNjZmIzNyJ9.Ktj9Zo7wrcF5Gs85vUg15V9mUo_jeqWSuragCsmOwhc',
             },
           });
   
