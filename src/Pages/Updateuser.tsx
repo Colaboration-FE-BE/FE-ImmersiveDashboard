@@ -8,8 +8,8 @@ const YourFormComponent = () => {
     Role: '',
     email: '',
     password: '',
-    team: '', // Tambahkan properti untuk team
-    Status: '', // Tambahkan properti untuk Status
+    team: '', 
+    Status: '', 
   });
 
   const handleChange = (e:any) => {
@@ -22,7 +22,7 @@ const YourFormComponent = () => {
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    // Lakukan sesuatu dengan formData, misalnya kirim ke server atau validasi
+
     console.log(formData);
   };
 
@@ -59,7 +59,7 @@ const YourFormComponent = () => {
             <option value="default">Default</option>
           </select>
         </div>
-        {/* Tambahkan input lainnya di sini */}
+
       </div>
       <div className="mb-6 flex">
         <div className="flex-1 mr-2">

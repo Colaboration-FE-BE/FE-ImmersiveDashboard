@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Swal from "sweetalert2";
@@ -7,39 +8,58 @@ import EditCard from "../components/AlertCard";
 import EditCard2 from "../components/Alertcard2";
 import ReactDOM from "react-dom";
 
+interface ItemType {
+  id: number;
+  name: string;
+  pic: string;
+  start_date: string;
+  graduate_date: string;
+}
+
 const Table = () => {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      className: "Class A",
-      startDate: "2023-01-01",
-      graduate: "Yes",
-      mentor: "John Doe",
-    },
-    {
-      id: 2,
-      className: "Class B",
-      startDate: "2023-02-01",
-      graduate: "No",
-      mentor: "Jane Smith",
-    },
-  ]);
+  const [data, setData] = useState<ItemType[]>([]);
+  const [editData, setEditData] = useState<ItemType | null>(null);
+  const apiUrl = "https://immersive-dash-4-32uzyeupwa-as.a.run.app/class";
+  useEffect(() => {
 
-  const [editData, setEditData] = useState(null);
 
-  const handleEdit = (item: any) => {
+    // Mengambil data dari API saat komponen dimuat
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNjgxOTEsInVzZXJJZCI6IjYzNzAxOWJiLWRkNmItNGIzYy1hYjk5LWUzYzhhOTU0OWYwNiJ9.1j41vt9t1iYTLQJ2tl0WA8qLjfj8I42oO5Lr8lTEwdE',
+          },
+        });
+
+        // Mengonversi ID ke nomor terurut
+        const formattedData = response.data.data.map((item: any, index: number) => ({
+          ...item,
+          id: index + 1,
+        }));
+    
+        setData(formattedData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleEdit = (item: ItemType) => {
     setEditData(item);
 
     Swal.fire({
       title: "Edit Data",
-      html: "", // Place to display the EditCard component
-      showCancelButton: false, // No need for a cancel button here
-      showConfirmButton: false, // You can remove the confirm button
+      html: "",
+      showCancelButton: false,
+      showConfirmButton: false,
       customClass: {
-        popup: "p-0", // Remove SweetAlert padding to fit EditCard
+        popup: "p-0",
       },
       didOpen: () => {
-        // Render EditCard inside SweetAlert
         const editCardContainer = document.createElement("div");
         ReactDOM.render(
           <EditCard
@@ -57,14 +77,13 @@ const Table = () => {
   const handleTambahClick = () => {
     Swal.fire({
       title: "Tambah Data",
-      html: "", // Place for displaying the EditCard component
-      showCancelButton: false, // No need for the cancel button here
-      showConfirmButton: false, // You can remove the confirmation button
+      html: "",
+      showCancelButton: false,
+      showConfirmButton: false,
       customClass: {
-        popup: "p-0", // Remove padding to fit the EditCard
+        popup: "p-0",
       },
       didOpen: () => {
-        // Render the EditCard inside Swal
         const editCardContainer = document.createElement("div");
         ReactDOM.render(
           <EditCard2
@@ -72,10 +91,10 @@ const Table = () => {
             onCancel={handleCancelEdit}
             item={{
               id: 0,
-              className: "",
-              startDate: "",
-              graduate: "",
-              mentor: "",
+              name: "",
+              pic: "",
+              start_date: "",
+              graduate_date: "",
             }}
           />,
           editCardContainer
@@ -85,15 +104,32 @@ const Table = () => {
     });
   };
 
-  const handleSaveEdit = (editedItem: any) => {
-    const updatedData = data.map((item) =>
-      item.id === editedItem.id ? editedItem : item
-    );
-    setData(updatedData);
-    setEditData(null);
+  const handleSaveEdit = async (editedItem: ItemType) => {
+    try {
+      // Kirim permintaan PUT atau PATCH ke API untuk menyimpan perubahan
+      const response = await axios.put(
+        `${apiUrl}/${editedItem.id}`,
+        editedItem,
+        {
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNjgxOTEsInVzZXJJZCI6IjYzNzAxOWJiLWRkNmItNGIzYy1hYjk5LWUzYc29e74dca85be',
+          },
+        }
+      );
 
-    Swal.close();
-    Swal.fire("Tersimpan!", "Data telah diperbarui.", "success");
+  
+      const updatedData = data.map((item) =>
+        item.id === editedItem.id ? editedItem : item
+      );
+      setData(updatedData);
+
+      Swal.close();
+      Swal.fire("Tersimpan!", "Data telah diperbarui.", "success");
+    } catch (error) {
+      console.error("Error updating data:", error);
+      Swal.fire("Error", "Terjadi kesalahan saat menyimpan data.", "error");
+    }
   };
 
   const handleCancelEdit = () => {
@@ -101,7 +137,7 @@ const Table = () => {
     Swal.close();
   };
 
-  const handleDelete = (itemId: any) => {
+  const handleDelete = (itemId: number) => {
     Swal.fire({
       title: "Konfirmasi",
       text: "Apakah Anda yakin ingin menghapus data ini?",
@@ -111,11 +147,26 @@ const Table = () => {
       cancelButtonColor: "#d33",
       confirmButtonText: "Ya",
       cancelButtonText: "Tidak",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        const updatedData = data.filter((item) => item.id !== itemId);
-        setData(updatedData);
-        Swal.fire("Terhapus!", "Data telah dihapus.", "success");
+        try {
+          
+          await axios.delete(`https://immersive-dash-4-32uzyeupwa-as.a.run.app/class/${itemId}`, {
+            headers: {
+              Authorization:
+                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNzIxNzksInVzZXJJZCI6IjY1ZjRjY2FlLWNhMTgtNDU2Yy05YTBmLTAyYTQwYzJiNjMzZCJ9.CIeNI6DTK7u5hWjpclQ1_G2ToMpiyfMk_6Lc7mkhOB0',
+            },
+          });
+  
+   
+          const updatedData = data.filter((item) => item.id !== itemId);
+          setData(updatedData);
+  
+          Swal.fire("Terhapus!", "Data telah dihapus.", "success");
+        } catch (error) {
+          console.error("Error deleting data:", error);
+          Swal.fire("Error", "Terjadi kesalahan saat menghapus data.", "error");
+        }
       }
     });
   };
@@ -140,9 +191,9 @@ const Table = () => {
           <tr>
             <th className="border px-4 py-2">No</th>
             <th className="border px-4 py-2">Nama Class</th>
+            <th className="border px-4 py-2">PIC</th>
             <th className="border px-4 py-2">Start Date</th>
-            <th className="border px-4 py-2">Graduate</th>
-            <th className="border px-4 py-2">Mentor</th>
+            <th className="border px-4 py-2">Graduate Date</th>
             <th className="border px-4 py-2">Aksi</th>
           </tr>
         </thead>
@@ -150,16 +201,20 @@ const Table = () => {
           {data.map((item) => (
             <tr key={item.id}>
               <td className="border px-4 py-2">{item.id}</td>
-              <td className="border px-4 py-2">{item.className}</td>
-              <td className="border px-4 py-2">{item.startDate}</td>
-              <td className="border px-4 py-2">{item.graduate}</td>
-              <td className="border px-4 py-2">{item.mentor}</td>
+              <td className="border px-4 py-2">{item.name}</td>
+              <td className="border px-4 py-2">{item.pic}</td>
+              <td className="border px-4 py-2">
+                {new Date(item.start_date).toLocaleDateString()}
+              </td>
+              <td className="border px-4 py-2">
+                {new Date(item.graduate_date).toLocaleDateString()}
+              </td>
               <td className="flex border px-4 py-2 justify-center items-center h-20">
                 <a
                   href="#"
                   className="text-blue-500 hover:text-blue-700 cursor-pointer"
                   onClick={(e) => {
-                    e.preventDefault(); // Prevent navigating to other pages
+                    e.preventDefault();
                     handleEdit(item);
                   }}
                 >

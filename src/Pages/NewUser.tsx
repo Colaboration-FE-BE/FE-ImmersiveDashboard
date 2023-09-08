@@ -7,8 +7,8 @@ const YourFormComponent = () => {
     Role: '',
     email: '',
     password: '',
-    team: '', // Tambahkan properti untuk team
-    Status: '', // Tambahkan properti untuk Status
+    team: '',
+    Status: '',
   });
 
   const handleChange = (e:any) => {
@@ -21,108 +21,141 @@ const YourFormComponent = () => {
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    // Lakukan sesuatu dengan formData, misalnya kirim ke server atau validasi
-    console.log(formData);
+
+    // Buat objek data untuk ditambahkan ke API
+    const newData = {
+      full_name: formData.FullName,
+      role: formData.Role,
+      email: formData.email,
+      password: formData.password,
+      team: formData.team,
+      status: formData.Status === 'active' ? true : false,
+    };
+
+    // Kirim permintaan POST ke API untuk menambahkan data
+    fetch('https://immersive-dash-4-32uzyeupwa-as.a.run.app/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2OTQxNjUyNTksInVzZXJJZCI6IjYzNzAxOWJiLWRkNmItNGIzYy1hYjk5LWUzYzhhOTU0OWYwNiJ9.AJadbg1QHHy9Dv528X65XUrem_KC-3F7ea6COXzFkEc', // Ganti dengan token akses Anda
+      },
+      body: JSON.stringify(newData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Berhasil menambahkan data
+          console.log('Data berhasil ditambahkan.');
+          // Tambahkan logika atau tindakan selanjutnya jika diperlukan
+        } else {
+          // Gagal menambahkan data
+          console.error('Gagal menambahkan data:', response.status, response.statusText);
+        }
+      })
+      .catch((error) => {
+        console.error('Terjadi kesalahan saat menambahkan data:', error);
+      });
   };
 
   return (
     <Layout>
-      <div className='max-w-md	'>
-      <form onSubmit={handleSubmit} style={{ width: '1080px' }} className='pr-10'>
-      <div className="grid gap-6 mb-6 md:grid-cols-2 mt-40 ">
-
-        <div>
-          <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fullname</label>
-          <input
-            type="text"
-            id="first_name"
-            name="FullName"
-            value={formData.FullName}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="John"
-            required
-          />
-        </div>
-        <div className="mb-6">
-          <label htmlFor="role" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
-          <select
-            id="role"
-            name="Role"
-            value={formData.Role}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            required
-          >
-            <option value="admin">Admin</option>
-            <option value="default">Default</option>
-          </select>
-        </div>
-        {/* Tambahkan input lainnya di sini */}
+      <div className='max-w-md '>
+        <form onSubmit={handleSubmit} style={{ width: '1080px' }} className='pr-10'>
+          {/* Form input fields */}
+          <div className="grid gap-6 mb-6 md:grid-cols-2 mt-40 ">
+            <div>
+              <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fullname</label>
+              <input
+                type="text"
+                id="first_name"
+                name="FullName"
+                value={formData.FullName}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="John"
+                required
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="role" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+              <select
+                id="role"
+                name="Role"
+                value={formData.Role}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option value="admin">Admin</option>
+                <option value="default">Default</option>
+              </select>
+            </div>
+            {/* Tambahkan input lainnya di sini */}
+          </div>
+          <div className="mb-6 flex">
+            <div className="flex-1 mr-2">
+              <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="john.doe@company.com"
+                required
+              />
+            </div>
+            <div className="flex-1 ml-2">
+              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="•••••••••"
+                required
+              />
+            </div>
+          </div>
+          <div className="mb-6 flex">
+            <div className="flex-grow">
+              <label htmlFor="team" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Team</label>
+              <select
+                id="team"
+                name="team"
+                value={formData.team}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option value="Academic">Academic</option>
+                <option value="People">People</option>
+                <option value="Placement">Placement</option>
+                <option value="Admission">Admission</option>
+              </select>
+            </div>
+            <div className="ml-6 flex-grow">
+              <label htmlFor="Status" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
+              <select
+                id="Status"
+                name="Status"
+                value={formData.Status}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+              >
+                <option value="active">active</option>
+                <option value="Notactiv">Notactiv</option>
+              </select>
+            </div>
+          </div>
+          <button type='submit' className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+            Submit
+          </button>
+        </form>
       </div>
-      <div className="mb-6 flex">
-        <div className="flex-1 mr-2">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="john.doe@company.com"
-            required
-          />
-        </div>
-        <div className="flex-1 ml-2">
-          <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="•••••••••"
-            required
-          />
-        </div>
-      </div>
-      <div className="mb-6 flex">
-        <div className="flex-grow">
-          <label htmlFor="team" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Team</label>
-          <select
-            id="team"
-            name="team"
-            value={formData.team}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            required
-          >
-            <option value="Academic">Academic</option>
-            <option value="People">People</option>
-            <option value="Placement">Placement</option>
-            <option value="Admission">Admission</option>
-          </select>
-        </div>
-        <div className="ml-6 flex-grow">
-          <label htmlFor="Status" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-          <select
-            id="Status"
-            name="Status"
-            value={formData.Status}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark-bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            required
-          >
-            <option value="active">active</option>
-            <option value="Notactiv">Notactiv</option>
-          </select>
-        </div>
-      </div>
-      <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-    </form>
-    </div>
     </Layout>
   );
 };

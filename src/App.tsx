@@ -24,7 +24,6 @@ const App = () => {
         <Route element={<Mente />} path="/Mente" />
         <Route element={<MenteLog />} path="/MenteLog" />
         <Route element={<Layout />} path="/Layout" />
-        <Route element={<Header />} path="/header" />
         <Route element={<UserPage />} path="/page" />
         <Route element={<Newuser />} path="/Newuser" />
         <Route element={<Update />} path="/updateuser" />
