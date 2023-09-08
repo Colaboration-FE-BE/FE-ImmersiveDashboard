@@ -1,14 +1,12 @@
 const CardLog = () => {
   return (
     <div className=" flex justify-between gap-28 px-6 py-2.5 bg-white rounded shadow ">
-      <div>
+      <div className="text-blue-950">
         <p className=" whitespace-nowrap">End Of Section</p>
-        <h4 className="text-blue-950 text-base font-semibold leading-tight">
-          Bagas
-        </h4>
+        <h4 className=" text-base font-semibold leading-tight">Bagas</h4>
         <p>Sep 29,2023</p>
       </div>
-      <div className="">
+      <div className=" text-blue-950">
         <p className=" whitespace-normal">
           Quam dolor eveniet iusto dolores, molestiae rerum laudantium fugiat
           illum nihil et, ut atque dolorem necessitatibus omnis incidunt

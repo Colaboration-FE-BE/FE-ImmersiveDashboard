@@ -11,8 +11,7 @@ const ButtonLogin: FC<ButtonLoginProps> = ({ id, label, onClick }) => {
     <button
       id={id}
       onClick={onClick}
-      className="w-35 h-10 mt-8 px-6 py-4 bg-blue-950 rounded-3xl justify-center items-center gap-2.5 inline-flex text-white text-base font-semibold"
-    >
+      className="w-35 h-10 mt-8 px-6 py-4 bg-blue-950 rounded-3xl justify-center items-center gap-2.5 inline-flex text-white text-base font-semibold">
       {label}
     </button>
   );

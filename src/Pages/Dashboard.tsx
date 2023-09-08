@@ -7,7 +7,7 @@ const Dashboard = () => {
     <div className=" container w-full">
       <div className=" flex justify-center">
         <div className=" grid grid-cols-1 gap-5">
-          <div className=" flex gap-4 ">
+          <div className=" flex gap-10  ">
             <CardDashboard
               id=""
               title=" Mente Active"
@@ -28,7 +28,7 @@ const Dashboard = () => {
             />
           </div>
           <div className=" bg-slate-100 rounded-md">
-            <img className=" p-4" src="src\assets\Grapich Line.png" />
+            <img className="" src="src\assets\Grapich Line.png" />
           </div>
         </div>
       </div>
